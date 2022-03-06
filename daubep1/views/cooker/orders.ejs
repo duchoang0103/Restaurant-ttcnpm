@@ -1,0 +1,136 @@
+<%- include('../includes/components/headerAdmin.ejs') %>
+    <!-- <div class="container ">
+        <div class="row">
+            <div class="col-3">
+                <form action="/admin/search_date" class="col" method="POST">
+                    <div class="form-group">
+                        <span for="date_from" style="margin-right: 10px">Từ</span>
+                        <input type="text" class="datepicker" id="date_from" name="date_from" class="form-control"
+                            value="<%= moment().format('L') %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="date_from">Đến</label>
+                        <input type="text" class="datepicker" id="date_to" name="date_to" class="form-control"
+                            value="<%= moment().format('L') %>">
+
+                    </div>
+
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit" class="btn btn-primary mb-3 mr-3 float-right">Search</button>
+                </form>
+            </div>
+        </div>
+    </div> -->
+
+    <% if (orders.length> 0) { %>
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Tên món</th>
+                    <th>Giá</th>
+                    <th>Mô tả</th>
+                    <th>Trạng thái</th>
+                    <th>Ngày tạo</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                <% for (let i in orders) { %>
+                    <%if( orders[i].products.length> 0 && orders[i].status === 1) { %>
+                        <tr>
+                            <td>++++++++++++++++++</td>
+                            <td>++++++++++++++++++</td>
+                        </tr>
+                        <tr>
+                            <td colspan="1"> <b> <b class="text-danger  mb-2">----Khách hàng: <%= orders[i].user.name%>
+                                    </b></b> </td>
+                            <% if(orders[i].status === 1) {%>
+                                <td><a class="btn btn-outline-success rounded-pill"
+                                    href="/editOrder/?orderId=<%= orders[i]._id %>&&hide=true" onclick="return confirm('Bạn chắc chắn khách hàng đã Thanh toán.');"">Đã Thanh toán</a></td>
+                            <% } %>
+                            
+                            <td><b><%= orders[i].total%> VND</b> </td>
+                        </tr>
+
+                        <% for (let p of orders[i].products) { %>
+                            <tr>
+                                <td>
+                                    <b class="text-primary-darker  mb-2">
+                                        <%= p.product.title %>
+                                    </b>
+
+                                    <span class="d-none">1</span>
+                                    <img class="icon-img icon-img-sm mr-3" src="<%= p.product.imageUrl %>"
+                                        alt="<%= p.product.title %>">
+                                </td>
+
+                                <td>
+                                    <b>
+                                        <%= p.product.price %> VND
+                                    </b>
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-primary rounded-pill"
+                                        href="/editOrder/?orderId=<%= orders[i]._id %>&&productId=<%= p.product._id %>&&editMethod=2">-</a>
+
+                                    <span class="badge badge-lg badge-light   mb-2 mr-1  ml-1">
+                                        <%= p.quantity %>
+                                    </span>
+                                    <a class="btn btn-outline-primary rounded-pill "
+                                        href="/editOrder/?orderId=<%= orders[i]._id %>&&productId=<%= p.product._id %>&&editMethod=1">+</a>
+
+                                </td>
+                                <td>
+                                    <% if(p.status===1){ %>
+                                        <b class="text-primary  mb-2">Đang chuẩn bị.</b>
+
+                                        <% } %>
+
+                                            <% if(p.status===2){ %>
+                                                <b class="text-success  mb-2">Đã hoàn tất.</b>
+                                                <% } %>
+
+                                                    <% if(p.status===-1){ %>
+                                                        <b class="text-danger  mb-2">Đã hủy.</b>
+                                                        <% } %>
+
+                                                            <% if(p.status===4){ %>
+                                                                ...
+                                                                <% } %>
+
+                                </td>
+                                <td>
+                                    <%= moment( new Date(orders[i].createdAt) ).format('llll') %>
+                                </td>
+                                <td class="float-right">
+                                    <% if(p.status===1){ %>
+
+                                        <a class="btn btn-soft-primary mr-3"
+                                            href="/editOrder/?orderId=<%= orders[i]._id %>&&productId=<%= p.product._id %>&&editMethod=3" onclick="return confirm('Bạn xác nhận món ăn đã hoàn tất.');">Hoàn
+                                            tất</a>
+                                        <a class="btn btn-soft-danger mr-3"
+                                            href="/editOrder/?orderId=<%= orders[i]._id %>&&productId=<%= p.product._id %>&&editMethod=4" onclick="return confirm('Bạn xác nhận Hủy món ăn.');">Hủy
+                                            món</a>
+                                            
+                                        <% } %>
+                                            <% if(p.status===2){ %>
+                                                <b class="text-success  mb-2">Đã hoàn tất.</b>
+
+                                                <% } %>
+                                                    <% if(p.status===-1){ %>
+                                                        <b class="text-danger  mb-2">Đã hủy món.</b>
+
+                                                        <% } %>
+                                </td>
+                            </tr>
+                            <% }; %>
+                                <% } %>
+                                    <% } %>
+            </tbody>
+        </table>
+
+        <% } else { %>
+            <h1>No Products Found!</h1>
+            <% } %>
+                <%- include('../includes/components/footerAdmin.ejs') %>

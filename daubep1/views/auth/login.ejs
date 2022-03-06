@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from htmlstream.com/preview/nova-v1.2.2/ui-components/authentication/registration.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 06 Jun 2021 13:27:53 GMT -->
+<head>
+  <!-- Title -->
+  <title>Đăng nhập</title>
+
+  <!-- Required Meta Tags Always Come First -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="https://htmlstream.com/preview/nova-v1.2.2/favicon.ico">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
+  <link href="/assets/vendor/nova-icons/nova-icons.css" rel="stylesheet">
+
+  <!-- CSS Nova Template -->
+  <link rel="stylesheet" href="/assets/css/theme.css">
+
+  <!-- DEMO Only -->
+  <style>
+    .arrow-back {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      top: 6%;
+      left: 5%;
+    }
+  </style>
+  <!-- End DEMO Only -->
+</head>
+
+<body>
+<main class="d-flex flex-column u-hero u-hero--end min-vh-100">
+
+
+  <div class="container py-6 my-auto">
+    <div class="d-flex align-items-center justify-content-center">
+      <!-- Card -->
+      <div class="card" style="width: 460px; max-width: 100%;">
+        <div class="card-body p-4 p-lg-7">
+          <h2 class="text-center mb-4 h3">Login</h2>
+
+          <!-- Create Account Form -->
+          <form class="js-validate"  action="/login" method="POST">
+            <!-- Email -->
+            <div class="form-group js-form-message js-focus-state">
+              <label for="email">Email</label>
+              <div class="input-group input-group-merge">
+                <!-- Email Field Icon -->
+                <div class="input-group-prepend-merge">
+                  <i class="nova-email"></i>
+                </div>
+                <!-- End Email Field Icon -->
+
+                <!-- Email Field -->
+                <input type="email" id="email" class="form-control form-control-prepend-icon" placeholder="Your email" name="email" required
+                       data-msg="Please enter your email address."
+                       data-error-class="u-has-error"
+                       data-success-class="u-has-success">
+                <!-- End Email Field -->
+              </div>
+            </div>
+            <!-- End Email -->
+
+            <!-- Password -->
+            <div class="form-group js-form-message js-focus-state">
+              <label for="password">Password</label>
+              <div class="input-group input-group-merge">
+                <!-- Password Field Icon -->
+                <div class="input-group-prepend-merge">
+                  <i class="nova-lock"></i>
+                </div>
+                <!-- End Password Field Icon -->
+
+                <!-- Password Field -->
+                <input type="password" id="password" class="form-control form-control-prepend-icon" placeholder="Enter your password" name="password" required
+                       data-error-class="u-has-error"
+                       data-success-class="u-has-success">
+                <!-- End Password Field -->
+              </div>
+            </div>
+            <!-- End Password -->
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-block btn-wide btn-primary text-uppercase">Login</button>
+            <!-- End Submit Button -->
+            <p class="text-center mb-0">
+                Don’t have an account? <a class="font-weight-semi-bold" href="/signup">Sign up here</a>
+              </p>
+          </form>
+          <!-- End Create Account Form -->
+        </div>
+      </div>
+      <!-- End Card -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="small bg-white p-3 px-md-4 mt-auto bg-transparent">
+    <div class="row justify-content-between">
+      <div class="col-lg text-center text-lg-left mb-3 mb-lg-0">
+      </div>
+
+      <div class="col-lg text-center mb-3 mb-lg-0">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item mx-2"><a class="link-muted" href="#"><i class="nova-twitter-alt"></i></a></li>
+          <li class="list-inline-item mx-2"><a class="link-muted" href="#"><i class="nova-vimeo-alt"></i></a></li>
+          <li class="list-inline-item mx-2"><a class="link-muted" href="#"><i class="nova-github"></i></a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg text-center text-lg-right">
+        <ul class="list-dot list-inline mb-0">
+          <li class="list-dot-item list-dot-item-not list-inline-item mr-lg-2"><a class="link-dark" href="#">FAQ</a></li>
+          <li class="list-dot-item list-inline-item mr-lg-2"><a class="link-dark" href="#">Support</a></li>
+          <li class="list-dot-item list-inline-item mr-lg-2"><a class="link-dark" href="#">Contact us</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+</main>
+
+<!-- JS Global Compulsory -->
+<script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+<script src="/assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
+<script src="/assets/vendor/popper.js/dist/umd/popper.min.js"></script>
+<script src="/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- JS Implementing Libraries -->
+<script src="/assets/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+
+<!-- JS Nova -->
+<script src="/assets/js/hs.core.js"></script>
+<script src="/assets/js/components/hs.jquery-validation.js"></script>
+
+<!-- JS Libraries Init. -->
+<script>
+  $(document).on('ready', function () {
+    // initialization of form validation
+    $.HSCore.components.HSValidation.init('.js-validate');
+  });
+</script>
+</body>
+
+<!-- Mirrored from htmlstream.com/preview/nova-v1.2.2/ui-components/authentication/registration.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 06 Jun 2021 13:27:53 GMT -->
+</html>
