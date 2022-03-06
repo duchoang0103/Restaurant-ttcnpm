@@ -1,0 +1,90 @@
+<%- include('../includes/components/headerAdmin.ejs') %>
+    <div class="container ">
+        <div class="row">
+            <div class="col-3">
+                <form action="/admin/search_date" class="col" method="POST">
+                    <div class="form-group">
+                        <span for="date_from" style="margin-right: 10px">Từ</span>
+                        <input type="date" class="datepicker" id="date_from" name="date_from" class="form-control"
+                            value="<%= moment().format('L') %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="date_from">Đến</label>
+                        <input type="date" class="datepicker" id="date_to" name="date_to" class="form-control"
+                            value="<%= moment().format('L') %>">
+
+                    </div>
+
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit" class="btn btn-primary mb-3 mr-3 float-right">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <% if (orders.length> 0) { %>
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Người dùng</th>
+                    <th>Tên món</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Trạng thái</th>
+                    <th>Ngày tạo</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                <% for (let order of orders) { %>
+                    <% for (let p of order.products) { %>
+                        <tr>
+                            <td>
+                                <%= order.user.name%>
+                            </td>
+                            <td>
+                                <span class="d-none">1</span>
+                                <img class="icon-img icon-img-sm mr-3" src="<%= p.product.imageUrl %>"
+                                alt="<%= p.product.title %>">
+                                <%= p.product.title %>
+                            </td>
+
+                            <td>
+                                <%= p.product.price %>
+                            </td>
+                            <td>
+                                <%= p.quantity %>
+                            </td>
+                            <td>
+                                <% if(p.status===1){ %>
+                                    <p class="text-primary mb-2">Đang chuẩn bị.</p>
+                                    <% } %>
+
+                                        <% if(p.status===2){ %>
+                                            <p class="text-success mb-2">Đã hoàn tất.</p>
+                                            <% } %>
+
+                                                <% if(p.status===-1){ %>
+                                                    <p class="text-danger mb-0">Đã hủy.</p>
+                                                    <% } %>
+
+                                                        <% if(p.status===4){ %>
+                                                            ...
+                                                            <% } %>
+
+                            </td>
+                            <td>
+                                <%= moment( new Date(order.createdAt) ).format('llll') %>
+                            </td>
+
+                        </tr>
+                        <% }; %>
+                            <% } %>
+            </tbody>
+        </table>
+
+        <% } else { %>
+            <h1>No Products Found!</h1>
+            <% } %>
+                <%- include('../includes/components/footerAdmin.ejs') %>

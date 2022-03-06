@@ -1,0 +1,154 @@
+</div>
+<!-- Footer -->
+<footer class="small bg-white p-3 px-md-4 mt-auto d-print-none">
+  <div class="row justify-content-between">
+    <div class="col-lg text-center text-lg-left mb-3 mb-lg-0">
+      <ul class="list-dot list-inline mb-0">
+        <li class="list-dot-item list-dot-item-not list-inline-item mr-lg-2"><a class="link-dark" href="#">FAQ</a></li>
+        <li class="list-dot-item list-inline-item mr-lg-2"><a class="link-dark" href="#">Support</a></li>
+        <li class="list-dot-item list-inline-item mr-lg-2"><a class="link-dark" href="#">Contact us</a></li>
+      </ul>
+    </div>
+
+    <div class="col-lg text-center mb-3 mb-lg-0">
+      <ul class="list-inline mb-0">
+        <li class="list-inline-item mx-2"><a class="link-muted" href="#"><i class="nova-twitter-alt"></i></a>
+        </li>
+        <li class="list-inline-item mx-2"><a class="link-muted" href="#"><i class="nova-vimeo-alt"></i></a></li>
+        <li class="list-inline-item mx-2"><a class="link-muted" href="#"><i class="nova-github"></i></a></li>
+      </ul>
+    </div>
+
+    <div class="col-lg text-center text-lg-right">
+      &copy; Team NCT
+    </div>
+  </div>
+</footer>
+<!-- End Footer -->
+</div>
+</main>
+
+<!-- JS Global Compulsory -->
+<script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+<script src="/assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
+<script src="/assets/vendor/popper.js/dist/umd/popper.min.js"></script>
+<script src="/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- JS Implementing Libraries -->
+<script src="/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
+<script src="/assets/vendor/select2/dist/js/select2.full.min.js"></script>
+<script src="/assets/vendor/chartist/dist/chartist.min.js"></script>
+<script src="/assets/vendor/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js"></script>
+<script src="/assets/vendor/chartist-bar-labels/src/scripts/chartist-bar-labels.js"></script>
+<script src="/assets/vendor/resize-sensor/dist/resizeSensor.min.js"></script>
+<script src="/assets/vendor/jquery-shorten/src/jquery.shorten.js"></script>
+<script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="/assets/vendor/datatables.net-select/js/dataTables.select.html"></script>
+
+<!-- JS Nova -->
+<script src="/assets/js/hs.core.js"></script>
+<script src="/assets/js/components/hs.malihu-scrollbar.js"></script>
+<script src="/assets/js/components/hs.side-nav.js"></script>
+<script src="/assets/js/components/hs.unfold.js"></script>
+<script src="/assets/js/components/hs.flatpickr.js"></script>
+<script src="/assets/js/components/hs.header-search.js"></script>
+<script src="/assets/js/components/hs.select2.js"></script>
+<script src="/assets/js/components/hs.chartist-area.js"></script>
+<script src="/assets/js/components/hs.chartist-bar.js"></script>
+<script src="/assets/js/components/hs.chartist-pie.js"></script>
+<script src="/assets/js/components/hs.chartist-donut.js"></script>
+<script src="/assets/js/components/hs.datatables.js"></script>
+
+
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+<!-- JS Libraries Init. -->
+<script>
+  $(document).on('ready', function () {
+    // initialization of custom scroll
+    $.HSCore.components.HSMalihuScrollBar.init($('.js-custom-scroll'));
+
+    // initialization of sidebar navigation component
+    $.HSCore.components.HSSideNav.init('.js-side-nav');
+
+    // initialization of dropdown component
+    $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+      unfoldHideOnScroll: false,
+      afterOpen: function () {
+        // initialization of charts
+        $.HSCore.components.HSChartistBar.init('#activity .js-bar-chart');
+
+        setTimeout(function () {
+          $('#activity .js-bar-chart').css('opacity', 1);
+        }, 100);
+
+        // help function for accordions in hidden block
+        $('#headerProjects .accordion-header').on('click', function () {
+          // vars
+          var target = $(this).data('target');
+
+          $(target).collapse('show');
+        });
+      }
+    });
+
+    // initialization of range datepicker
+    $.HSCore.components.HSFlatpickr.init('#headerRightSidebarDatepicker', {
+      locale: {
+        weekdays: {
+          shorthand: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+        }
+      },
+      nextArrow: '<i class="nova-arrow-right icon-text icon-text-xs"></i>',
+      prevArrow: '<i class="nova-arrow-left icon-text icon-text-xs"></i>'
+    });
+
+    $.HSCore.components.HSFlatpickr.init('#rangeDatepicker, #rangeDatepickerMyPortfolio', {
+      locale: {
+        weekdays: {
+          shorthand: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+        },
+        rangeSeparator: ' - '
+      },
+      nextArrow: '<em class="nova-arrow-right"></em>',
+      prevArrow: '<em class="nova-arrow-left"></em>'
+    });
+
+    // initialization of show on type module
+    $.HSCore.components.HSHeaderSearch.init('.js-header-search');
+
+    // initialization of show on type module
+    $.HSCore.components.HSSelect2.init('.js-custom-select');
+
+    // initialization of charts
+    $.HSCore.components.HSChartistArea.init('.js-area-chart');
+    $.HSCore.components.HSChartistBar.init('.js-bar-chart');
+    $.HSCore.components.HSChartistDonut.init('.js-donut-chart');
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      $(e.currentTarget.hash).find('.js-area-chart').each(function (el, tab) {
+        tab.__chartist__.update();
+      });
+    });
+
+    // initialization of datatables
+    $.HSCore.components.HSDatatables.init('.js-datatable', {
+      "columnDefs": [
+        { "orderable": false, "targets": 8 }
+      ]
+    });
+  });
+</script>
+<script>
+  $(document).ready(function () {
+    $('#example').DataTable({
+    });
+  });
+</script>
+
+
+</body>
+
+<!-- Mirrored from htmlstream.com/preview/nova-v1.2.2/demo-crypto/dashboards/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 06 Jun 2021 11:50:14 GMT -->
+
+</html>

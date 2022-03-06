@@ -1,0 +1,94 @@
+<nav class="navbar flex-nowrap p-0">
+    <div class="navbar-brand-wrapper col-auto">
+      <!-- Logo For Mobile View -->
+      <a class="navbar-brand navbar-brand-mobile" href="index.html">
+        <img class="img-fluid w-100" src="/assets/img/logo-mini.png" alt="Nova">
+      </a>
+      <!-- End Logo For Mobile View -->
+
+      <!-- Logo For Desktop View -->
+      <a class="navbar-brand navbar-brand-desktop" href="index.html">
+        <img class="side-nav-show-on-closed" src="/assets/img/logo-mini.png" alt="Nova" style="width: 41px; height: 33px;">
+        <img class="side-nav-hide-on-closed" src="/assets/img/logo.png" alt="Nova" style="width: 130px; height: 33px;">
+      </a>
+      <!-- End Logo For Desktop View -->
+    </div>
+
+    <div class="header-content col px-md-3 px-md-3">
+      <div class="d-flex align-items-center">
+        <!-- Side Nav Toggle -->
+        <a class="js-side-nav header-invoker mr-md-2" href="#"
+           data-close-invoker="#sidebarClose"
+           data-target="#sidebar"
+           data-target-wrapper="body">
+          <i class="nova-align-left"></i>
+        </a>
+        <!-- End Side Nav Toggle -->
+
+        <!-- Header Search -->
+        <div class="js-header-search position-relative"
+             data-search-target="#headerSearchResults"
+             data-search-mobile-invoker="#headerSearchMobileInvoker"
+             data-search-form="#headerSearchForm"
+             data-search-field="#headerSearchField"
+             data-search-clear="#headerSearchResultsClear">
+          <a id="headerSearchMobileInvoker" class="header-search-invoker header-invoker" href="#">
+            <i class="nova-search"></i>
+          </a>
+
+         
+        </div>
+        <!-- End Header Search -->
+
+        <!-- Header Dropdown -->
+        <div class="dropdown ml-auto">
+          
+        </div>
+        <!-- End Header Dropdown -->
+
+        <!-- Header Dropdown -->
+        <div class="dropdown ml-2">
+          
+        </div>
+        <!-- End Header Dropdown -->
+
+        <!-- Header User Dropdown -->
+        <div class="dropdown mx-3">
+          <% if (!isAuthenticated) { %>
+                <a class="btn btn-outline-info mb-3 mr-1" href="/adminlogin">Login</a>
+                <a class="btn btn-outline-info mb-3 mr-1" href="/adminsignup">Signup</a>
+            
+        <% } else { %>
+            <a id="profileMenuInvoker" class="header-complex-invoker" href="#" aria-controls="profileMenu" aria-haspopup="true" aria-expanded="false"
+             data-unfold-event="click"
+             data-unfold-target="#profileMenu"
+             data-unfold-type="css-animation"
+             data-unfold-duration="300"
+             data-unfold-animation-in="fadeIn"
+             data-unfold-animation-out="fadeOut">
+            <img class="avatar rounded-circle mr-md-2" src="/assets/img/100x100/img9.png" alt="Image description">
+            <span class="d-none d-md-block"><%= username %></span>
+            <i class="nova-angle-down d-none d-md-block ml-2"></i>
+          </a>
+
+          <ul id="profileMenu" class="unfold unfold-user unfold-light unfold-top unfold-centered position-absolute pt-2 pb-1 mt-1" aria-labelledby="profileMenuInvoker">
+            <li class="unfold-item unfold-item-has-divider mt-1">
+              <form action="/logout" method="post">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button style="border: none; background: none" class="unfold-link d-flex align-items-center text-nowrap" type="submit">
+                  <span class="unfold-item-icon mr-3">
+                    <i class="nova-power-off"></i>
+                  </span>
+                  Logout
+                </button>
+              </form>
+            </li>
+          </ul>
+        <% } %>
+          
+        </div>
+        <!-- End Header User Dropdown -->
+
+      </div>
+    </div>
+  </nav>
